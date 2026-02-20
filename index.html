@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OpenClaw Infrastructure Control Plane</title>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+
+--red:#ff3e3e;
+--violet:#9d4edd;
+--orange:#ff9100;
+--yellow:#ffcc00;
+--black:#050505;
+
+}
+
+body{
+
+background: radial-gradient(circle at top right, #1a0b2e 0%, #050505 100%);
+font-family:'Space Mono', monospace;
+color:white;
+
+}
+
+.font-syne{
+
+font-family:'Syne', sans-serif;
+
+}
+
+.glass{
+
+background: rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:16px;
+padding:24px;
+transition:0.3s;
+
+}
+
+.glass:hover{
+
+border-color:var(--red);
+box-shadow:0 0 30px rgba(157,78,221,0.2);
+
+}
+
+.gradient{
+
+background: linear-gradient(45deg,var(--red),var(--orange),var(--yellow),var(--violet));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.flow{
+
+border-left:2px solid var(--violet);
+padding-left:16px;
+margin-bottom:16px;
+
+}
+
+.logo{
+
+width:120px;
+margin-top:20px;
+margin-bottom:20px;
+
+}
+
+</style>
+
+</head>
+
+<body class="p-8">
+
+<div id="app" class="max-w-7xl mx-auto">
+
+<!-- HEADER -->
+
+<header class="mb-20">
+
+<h1 class="text-7xl font-syne font-bold">
+
+OPENCLAW  
+<span class="gradient">INFRASTRUCTURE CONTROL PLANE</span>
+
+</h1>
+
+<img src="assets/logo_openclaw.svg" class="logo">
+
+<p class="text-gray-400 text-xl max-w-3xl">
+
+Fondation Infrastructure sécurisée pour la plateforme IA agentique OpenClaw, basée sur AWS, Kubernetes et un modèle Zero Trust pour garantir isolation, auditabilité et sécurité des agents.
+
+</p>
+
+</header>
+
+
+<!-- OVERVIEW -->
+
+<section class="grid grid-cols-4 gap-6 mb-16">
+
+<div class="glass">
+
+<div class="text-gray-500 text-sm">Infrastructure</div>
+<div class="text-green-400 text-2xl font-bold">OPERATIONAL</div>
+
+</div>
+
+<div class="glass">
+
+<div class="text-gray-500 text-sm">Cluster Kubernetes</div>
+<div class="text-green-400 text-2xl font-bold">ACTIVE</div>
+
+</div>
+
+<div class="glass">
+
+<div class="text-gray-500 text-sm">Security Model</div>
+<div class="text-red-400 text-2xl font-bold">ZERO TRUST</div>
+
+</div>
+
+<div class="glass">
+
+<div class="text-gray-500 text-sm">Monitoring</div>
+<div class="text-yellow-400 text-2xl font-bold">CLOUDWATCH</div>
+
+</div>
+
+</section>
+
+
+<!-- INFRASTRUCTURE -->
+
+<section class="mb-16">
+
+<h2 class="text-3xl font-syne mb-6 text-violet-400">Infrastructure Overview</h2>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="glass" v-for="item in infrastructure">
+✓ {{item}}
+</div>
+
+</div>
+
+</section>
+
+
+<!-- KUBERNETES -->
+
+<section class="mb-16">
+
+<h2 class="text-3xl font-syne mb-6 text-orange-400">Architecture Kubernetes</h2>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="glass" v-for="item in kubernetes">
+✓ {{item}}
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NETWORK -->
+
+<section class="mb-16">
+
+<h2 class="text-3xl font-syne mb-6 text-red-400">Réseau et Sécurité</h2>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="glass" v-for="item in network">
+✓ {{item}}
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DOCKER -->
+
+<section class="mb-16">
+
+<h2 class="text-3xl font-syne mb-6 text-yellow-400">Container Runtime</h2>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="glass" v-for="item in docker">
+✓ {{item}}
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MONITORING -->
+
+<section class="mb-16">
+
+<h2 class="text-3xl font-syne mb-6 text-red-400">Monitoring & Observabilité</h2>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="glass" v-for="item in monitoring">
+✓ {{item}}
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CICD -->
+
+<section class="mb-16">
+
+<h2 class="text-3xl font-syne mb-6 text-orange-400">CI/CD Workflow Infrastructure</h2>
+
+<div class="glass">
+
+<div v-for="step in cicd" class="flow">
+
+<strong>{{step.title}}</strong>
+<p class="text-gray-400 text-sm">{{step.desc}}</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BANK PROBLEMS -->
+
+<section class="mb-16">
+
+<h2 class="text-3xl font-syne mb-6 text-violet-400">
+Problématiques Infrastructure Banque d’Investissement
+</h2>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="glass" v-for="item in bank">
+<strong>{{item.problem}}</strong>
+<p class="text-gray-400 mt-2">{{item.solution}}</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RISKS -->
+
+<section>
+
+<h2 class="text-3xl font-syne mb-6 text-red-400">
+Risques critiques Infrastructure
+</h2>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="glass" v-for="risk in risks">
+⚠ {{risk}}
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+
+const {createApp}=Vue;
+
+createApp({
+
+data(){
+
+return{
+
+infrastructure:[
+
+"EC2 c7i-flex.large deployed",
+
+"Ubuntu 22.04 LTS",
+
+"4GB RAM, 20GB EBS",
+
+"SSH sécurisé via key pair",
+
+"Infrastructure isolée dans VPC AWS"
+
+],
+
+kubernetes:[
+
+"Cluster Kubernetes auto-géré",
+
+"Pods OpenClaw orchestrateur actifs",
+
+"Isolation agents via pods",
+
+"Namespaces sécurisés"
+
+],
+
+network:[
+
+"Security Groups restrictifs",
+
+"Ports 22, 80, 443 ouverts",
+
+"Reverse proxy Nginx",
+
+"Zero Trust enforced"
+
+],
+
+docker:[
+
+"Docker runtime installé",
+
+"Images construites via CI/CD",
+
+"Containers isolés",
+
+"Agents déployés"
+
+],
+
+monitoring:[
+
+"CloudWatch actif",
+
+"Logs système collectés",
+
+"Monitoring CPU RAM réseau",
+
+"Audit infrastructure"
+
+],
+
+cicd:[
+
+{
+
+title:"Build",
+
+desc:"CI/CD construit images Docker"
+
+},
+
+{
+
+title:"Push",
+
+desc:"Images envoyées vers registry"
+
+},
+
+{
+
+title:"Deploy",
+
+desc:"Kubernetes déploie automatiquement"
+
+},
+
+{
+
+title:"Monitor",
+
+desc:"CloudWatch surveille système"
+
+}
+
+],
+
+bank:[
+
+{
+
+problem:"Protection données sensibles",
+
+solution:"Isolation Kubernetes + VPC sécurisé"
+
+},
+
+{
+
+problem:"Auditabilité",
+
+solution:"Logs CloudWatch complets"
+
+},
+
+{
+
+problem:"Isolation workloads",
+
+solution:"Pods isolés par agent"
+
+},
+
+{
+
+problem:"Sécurité réseau",
+
+solution:"Security Groups restrictifs"
+
+}
+
+],
+
+risks:[
+
+"Accès SSH non autorisé",
+
+"Compromission pod Kubernetes",
+
+"Container escape",
+
+"Mauvaise configuration réseau",
+
+"Privilege escalation",
+
+"Fuite données"
+
+]
+
+}
+
+}
+
+}).mount("#app");
+
+</script>
+
+
+</body>
+</html>
